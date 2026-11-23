@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>Melis'in Gitar Rehberi</title>
+  <style>
+    :root {
+      --bg: #0c0e12;
+      --surface: #141820;
+      --surface-2: #1c222d;
+      --border: rgba(255, 255, 255, 0.09);
+      --text: #f3f5f8;
+      --muted: #9aa3b2;
+      --accent: #f59e0b;
+      --accent-soft: rgba(245, 158, 11, 0.16);
+      --accent-contrast: #111317;
+      --danger: #ef4444;
+      --ok: #22c55e;
+      --radius: 16px;
+      --card-pad: 16px;
+    }
+
+    body[data-theme="black"] {
+      --bg: #09090b;
+      --surface: #121216;
+      --surface-2: #1a1a20;
+      --border: rgba(255, 255, 255, 0.09);
+      --text: #f4f4f6;
+      --muted: #9b9ba6;
+      --accent: #f59e0b;
+      --accent-soft: rgba(245, 158, 11, 0.16);
+      --accent-contrast: #111113;
+    }
+
+    body[data-theme="white"] {
+      --bg: #f6f7f9;
+      --surface: #ffffff;
+      --surface-2: #eef1f5;
+      --border: rgba(15, 23, 42, 0.1);
+      --text: #141821;
+      --muted: #5c6575;
+      --accent: #d97706;
+      --accent-soft: rgba(217, 119, 6, 0.13);
+      --accent-contrast: #ffffff;
+    }
+
+    body[data-theme="burgundy"] {
+      --bg: #17090d;
+      --surface: #240f16;
+      --surface-2: #32151f;
+      --border: rgba(255, 228, 235, 0.11);
+      --text: #fdf2f5;
+      --muted: #c9a3af;
+      --accent: #fb7185;
+      --accent-soft: rgba(251, 113, 133, 0.18);
+      --accent-contrast: #1c070c;
+    }
+
+    body[data-theme="navy"] {
+      --bg: #08111e;
+      --surface: #0f1c2e;
+      --surface-2: #172840;
+      --border: rgba(224, 242, 254, 0.11);
+      --text: #f0f7ff;
+      --muted: #98b2cf;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.18);
+      --accent-contrast: #061321;
+    }
+
+    body[data-theme="khaki"] {
+      --bg: #12140e;
+      --surface: #1b1f15;
+      --surface-2: #252b1d;
+      --border: rgba(236, 242, 220, 0.11);
+      --text: #f5f7ef;
+      --muted: #a6b097;
+      --accent: #a3be5b;
+      --accent-soft: rgba(163, 190, 91, 0.18);
+      --accent-contrast: #11150a;
+    }
+
+    body[data-compact="true"] {
+      --card-pad: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+      transition: background-color 0.22s ease, color 0.22s ease;
+    }
+
+    .app {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 18px 16px 88px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 14px;
+    }
+
+    .love-greeting {
+      margin: 0;
+      font-size: 1.12rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .love-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .sub-status {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 9px 13px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: transform 0.12s ease, opacity 0.15s ease, background-color 0.15s ease;
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+
+    .btn-accent {
+      background: var(--accent);
+      color: var(--accent-contrast);
+      border-color: transparent;
+    }
+
+    .btn-ghost {
+      background: transparent;
+    }
+
+    .btn-danger {
+      background: rgba(239, 68, 68, 0.14);
+      color: var(--danger);
+      border-color: rgba(239, 68, 68, 0.28);
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+      margin-bottom: 16px;
+      scrollbar-width: none;
+    }
+
+    .nav-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tab-btn {
+      flex: 0 0 auto;
+      padding: 10px 15px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      background: var(--surface);
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+
+    .tab-btn.active {
+      background: var(--accent);
+      color: var(--accent-contrast);
+      border-color: transparent;
+      font-weight: 700;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: 1.22rem;
+      font-weight: 750;
+    }
+
+    .section-desc {
+      margin: 2px 0 0;
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+
+    .card-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: var(--card-pad);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .card-title {
+      margin: 0;
+      font-size: 1.02rem;
+      font-weight: 700;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      white-space: nowrap;
+    }
+
+    .card-body {
+      margin: 8px 0 0;
+      font-size: 0.93rem;
+      white-space: pre-line;
+    }
+
+    .card-note {
+      margin-top: 10px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: var(--surface-2);
+      font-size: 0.86rem;
+      color: var(--muted);
+      white-space: pre-line;
+    }
+
+    .card-actions {
+      margin-top: 12px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .note-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px;
+      margin-bottom: 14px;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      font-family: inherit;
+      font-size: 0.92rem;
+      color: var(--text);
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 11px 12px;
+      outline: none;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--accent);
+    }
+
+    textarea {
+      min-height: 92px;
+      resize: vertical;
+    }
+
+    .field {
+      margin-bottom: 11px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 5px;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 36px 20px;
+      background: var(--surface);
+      border: 1px dashed var(--border);
+      border-radius: var(--radius);
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.62);
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+      z-index: 50;
+      padding: 14px;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal {
+      width: 100%;
+      max-width: 620px;
+      max-height: 88vh;
+      overflow-y: auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 18px;
+    }
+
+    .modal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .modal-head h3 {
+      margin: 0;
+      font-size: 1.08rem;
+    }
+
+    .theme-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(105px, 1fr));
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .theme-chip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px;
+      border-radius: 12px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      font-size: 0.86rem;
+      font-weight: 600;
+    }
+
+    .theme-chip.active {
+      border-color: var(--accent);
+      box-shadow: inset 0 0 0 1px var(--accent);
+    }
+
+    .swatch {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 1px solid rgba(128, 128, 128, 0.35);
+      flex-shrink: 0;
+    }
+
+    .switch-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 11px 12px;
+      border-radius: 12px;
+      background: var(--surface-2);
+      margin-bottom: 10px;
+      font-size: 0.9rem;
+    }
+
+    .switch-row input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 20px;
+      transform: translateX(-50%) translateY(16px);
+      background: var(--text);
+      color: var(--bg);
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      z-index: 80;
+      white-space: nowrap;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .helper-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body data-theme="black" data-compact="false">
+  <div class="app">
+    <header class="topbar">
+      <div>
+        <h1 class="love-greeting"><span class="love-dot"></span>Seni seviyorum Melis...</h1>
+        <div class="sub-status" id="syncStatus">Yerel mod aktif (Firebase bağlanınca bulut senkronizasyonu açılır)</div>
+      </div>
+      <div class="top-actions">
+        <button type="button" id="btnOpenImport">İçe Aktar</button>
+        <button type="button" id="btnOpenSettings">Ayarlar</button>
+      </div>
+    </header>
+
+    <nav class="nav-tabs" id="navTabs" aria-label="Bölümler"></nav>
+
+    <main id="mainContent"></main>
+  </div>
+
+  <!-- Ayarlar Modalı -->
+  <div class="modal-backdrop" id="settingsModal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle">
+    <div class="modal">
+      <div class="modal-head">
+        <h3 id="settingsTitle">Ayarlar ve Görünüm</h3>
+        <button type="button" class="btn-ghost" data-close="settingsModal">Kapat</button>
+      </div>
+
+      <div class="field">
+        <label>Uygulama Rengi (Tema)</label>
+        <div class="theme-grid" id="themeGrid">
+          <button type="button" class="theme-chip" data-theme-choice="black">
+            <span class="swatch" style="background:#09090b;"></span>Siyah
+          </button>
+          <button type="button" class="theme-chip" data-theme-choice="white">
+            <span class="swatch" style="background:#f8fafc;"></span>Beyaz
+          </button>
+          <button type="button" class="theme-chip" data-theme-choice="burgundy">
+            <span class="swatch" style="background:#7f1d2d;"></span>Bordo
+          </button>
+          <button type="button" class="theme-chip" data-theme-choice="navy">
+            <span class="swatch" style="background:#172554;"></span>Lacivert
+          </button>
+          <button type="button" class="theme-chip" data-theme-choice="khaki">
+            <span class="swatch" style="background:#4d5d2b;"></span>Haki
+          </button>
+        </div>
+      </div>
+
+      <label class="switch-row">
+        <span>Kartları daha kompakt göster</span>
+        <input type="checkbox" id="optCompact" />
+      </label>
+
+      <label class="switch-row">
+        <span>Ekstra pratik ipuçlarını göster</span>
+        <input type="checkbox" id="optShowNotes" />
+      </label>
+
+      <label class="switch-row">
+        <span>Öğretmen ekleme/düzenleme butonlarını göster</span>
+        <input type="checkbox" id="optTeacherMode" />
+      </label>
+
+      <div class="helper-row">
+        <button type="button" class="btn-accent" id="btnCopyShareJson">Mevcut Ders Verisini JSON Kopyala</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tek Tıkla JSON İçe Aktarım Modalı -->
+  <div class="modal-backdrop" id="importModal" role="dialog" aria-modal="true" aria-labelledby="importTitle">
+    <div class="modal">
+      <div class="modal-head">
+        <h3 id="importTitle">Tek Tıkla JSON İçe Aktar</h3>
+        <button type="button" class="btn-ghost" data-close="importModal">Kapat</button>
+      </div>
+
+      <div class="field">
+        <label for="importMode">Aktarım Şekli</label>
+        <select id="importMode">
+          <option value="merge">Mevcut derslerin üzerine ekle / güncelle</option>
+          <option value="replace">Mevcut derslerin yerine tamamen bunu koy</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="jsonInput">JSON Verisini Yapıştır</label>
+        <textarea id="jsonInput" placeholder='{"akorlar":[...],"ritimler":[...],"repertuar":[...],"teorik":[...],"diger":[...]}'></textarea>
+      </div>
+
+      <div class="helper-row">
+        <button type="button" class="btn-accent" id="btnRunImport">İçe Aktar ve Kaydet</button>
+        <button type="button" id="btnFillSampleJson">Örnek JSON Doldur</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Öğretmen İçerik Ekleme/Düzenleme Modalı -->
+  <div class="modal-backdrop" id="lessonModal" role="dialog" aria-modal="true" aria-labelledby="lessonTitle">
+    <div class="modal">
+      <div class="modal-head">
+        <h3 id="lessonTitle">Ders İçeriği Ekle</h3>
+        <button type="button" class="btn-ghost" data-close="lessonModal">Kapat</button>
+      </div>
+
+      <div class="field">
+        <label for="lessonSection">Bölüm</label>
+        <select id="lessonSection">
+          <option value="akorlar">Akorlar</option>
+          <option value="ritimler">Ritimler</option>
+          <option value="repertuar">Repertuar</option>
+          <option value="teorik">Teorik Bilgiler</option>
+          <option value="diger">Diğer</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="lessonCardTitle">Başlık</label>
+        <input type="text" id="lessonCardTitle" placeholder="Örn: Em Akoru veya 4/4 Temel Ritim" />
+      </div>
+
+      <div class="field">
+        <label for="lessonTag">Kısa Etiket (İsteğe bağlı)</label>
+        <input type="text" id="lessonTag" placeholder="Örn: Açık Akor / Kolay" />
+      </div>
+
+      <div class="field">
+        <label for="lessonDetail">İçerik / Akor Sırası / Açıklama</label>
+        <textarea id="lessonDetail" placeholder="Akor kalıbını, vuruş yönlerini veya şarkı akorlarını buraya yaz..."></textarea>
+      </div>
+
+      <div class="field">
+        <label for="lessonTip">Pratik İpucu</label>
+        <textarea id="lessonTip" placeholder="Parmak açısı veya geçiş tavsiyesi..."></textarea>
+      </div>
+
+      <div class="helper-row">
+        <button type="button" class="btn-accent" id="btnSaveLesson">Kaydet</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    // İstersen kendi Firebase proje bilgilerini buraya ekleyip bulut senkronizasyonunu açabilirsin.
+    const FIREBASE_CONFIG = null;
+
+    const SECTIONS = [
+      {
+        id: "akorlar",
+        label: "Akorlar",
+        desc: "Temel akor basışları ve rahat geçişler için başlangıç kartları."
+      },
+      {
+        id: "ritimler",
+        label: "Ritimler",
+        desc: "Sağ el akışını oturtmak için sade ritim kalıpları."
+      },
+      {
+        id: "repertuar",
+        label: "Repertuar",
+        desc: "Çalacağımız şarkıların akorları ve küçük notları."
+      },
+      {
+        id: "teorik",
+        label: "Teorik Bilgiler",
+        desc: "Gitarın mantığını anlamayı kolaylaştıran temel bilgiler."
+      },
+      {
+        id: "diger",
+        label: "Diğer",
+        desc: "Isınma hareketleri ve özel çalışma önerileri."
+      },
+      {
+        id: "notlarim",
+        label: "Notlarım",
+        desc: "Çalışırken aklına gelen her şeyi buraya kendi notun olarak yazabilirsin."
+      }
+    ];
+
+    const DEFAULT_LESSONS = {
+      akorlar: [
+        {
+          id: "ak-em",
+          title: "Em (Mi Minör)",
+          tag: "Başlangıç",
+          detail: "2. perde 5. tel (orta parmak) ve 2. perde 4. tel (yüzük parmağı). Boş tellerin hepsine vurabilirsin.",
+          tip: "Parmak uçlarını tellere dik basmaya çalış, yan tellere değmesin."
+        },
+        {
+          id: "ak-c",
+          title: "C (Do Majör)",
+          tag: "Temel Akor",
+          detail: "3. perde 5. tel (yüzük), 2. perde 4. tel (orta), 1. perde 2. tel (işaret). 6. teli çalmamaya özen göster.",
+          tip: "Em'den C'ye geçerken parmaklarını havada fazla kaldırmadan hedef tellere yaklaştır."
+        }
+      ],
+      ritimler: [
+        {
+          id: "rt-temel",
+          title: "4/4 Temel Aşağı - Yukarı",
+          tag: "Ritim",
+          detail: "1 (Aşağı) - ve (Yukarı) - 2 (Aşağı) - ve (Yukarı) - 3 (Aşağı) - ve (Yukarı) - 4 (Aşağı) - ve (Yukarı)",
+          tip: "Önce yavaş ve sabit bir tempoda sayarak çal; hızlanmak sonradan gelir."
+        }
+      ],
+      repertuar: [
+        {
+          id: "rp-1",
+          title: "İlk Isınma Şarkısı (Örnek)",
+          tag: "Akor Döngüsü",
+          detail: "Em  --->  C  --->  G  --->  D\nHer akorda 4 vuruş bekleyerek temiz geçiş çalışalım.",
+          tip: "Akor değiştirmeden bir önceki vuruşun son anında parmaklarını hazırla."
+        }
+      ],
+      teorik: [
+        {
+          id: "th-teller",
+          title: "Tel İsimleri (İnce'den Kalın'a)",
+          tag: "Teori",
+          detail: "1. tel: Mi (e)  |  2. tel: Si (B)  |  3. tel: Sol (G)\n4. tel: Re (D)  |  5. tel: La (A)  |  6. tel: Mi (E)",
+          tip: "İnce tel fiziksel olarak en alttaki, kalın tel en üstteki teldir."
+        }
+      ],
+      diger: [
+        {
+          id: "dg-isinma",
+          title: "1 Dakikalık Parmak Isıtma",
+          tag: "Isınma",
+          detail: "1. telde 1-2-3-4 perdelerini sırayla basıp bırak; bileğini kasmadan rahat tut.",
+          tip: "Elinde gerginlik hissedersen kısa bir mola ver."
+        }
+      ]
+    };
+
+    const STORAGE_KEYS = {
+      lessons: "melis_gitar_rehberi_lessons_v1",
+      myNotes: "melis_gitar_rehberi_my_notes_v1",
+      settings: "melis_gitar_rehberi_settings_v1"
+    };
+
+    const DEFAULT_SETTINGS = {
+      theme: "black",
+      compact: false,
+      showNotes: true,
+      teacherMode: false
+    };
+
+    let state = {
+      activeSection: "akorlar",
+      lessons: loadLessons(),
+      myNotes: loadMyNotes(),
+      settings: loadSettings(),
+      editingCard: null
+    };
+
+    function loadLessons() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEYS.lessons);
+        if (!raw) return structuredClone(DEFAULT_LESSONS);
+        const parsed = JSON.parse(raw);
+        return normalizeLessonsObject(parsed);
+      } catch {
+        return structuredClone(DEFAULT_LESSONS);
+      }
+    }
+
+    function normalizeLessonsObject(obj) {
+      const base = { akorlar: [], ritimler: [], repertuar: [], teorik: [], diger: [] };
+      if (!obj || typeof obj !== "object") return base;
+      Object.keys(base).forEach((key) => {
+        if (Array.isArray(obj[key])) {
+          base[key] = obj[key].map((item, idx) => ({
+            id: item.id || `${key}-${Date.now()}-${idx}`,
+            title: String(item.title || "İsimsiz Kart"),
+            tag: String(item.tag || ""),
+            detail: String(item.detail || ""),
+            tip: String(item.tip || "")
+          }));
+        }
+      });
+      return base;
+    }
+
+    function loadMyNotes() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEYS.myNotes);
+        const parsed = raw ? JSON.parse(raw) : [];
+        return Array.isArray(parsed) ? parsed : [];
+      } catch {
+        return [];
+      }
+    }
+
+    function loadSettings() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEYS.settings);
+        return { ...DEFAULT_SETTINGS, ...(raw ? JSON.parse(raw) : {}) };
+      } catch {
+        return { ...DEFAULT_SETTINGS };
+      }
+    }
+
+    async function saveLessons(nextLessons) {
+      state.lessons = normalizeLessonsObject(nextLessons);
+      localStorage.setItem(STORAGE_KEYS.lessons, JSON.stringify(state.lessons));
+      await pushCloudData();
+    }
+
+    async function saveMyNotes(nextNotes) {
+      state.myNotes = nextNotes;
+      localStorage.setItem(STORAGE_KEYS.myNotes, JSON.stringify(state.myNotes));
+      await pushCloudData();
+    }
+
+    function saveSettings(nextSettings) {
+      state.settings = { ...state.settings, ...nextSettings };
+      localStorage.setItem(STORAGE_KEYS.settings, JSON.stringify(state.settings));
+      applySettingsToUI();
+    }
+
+    function applySettingsToUI() {
+      document.body.setAttribute("data-theme", state.settings.theme || "black");
+      document.body.setAttribute("data-compact", String(Boolean(state.settings.compact)));
+
+      document.getElementById("optCompact").checked = Boolean(state.settings.compact);
+      document.getElementById("optShowNotes").checked = Boolean(state.settings.showNotes);
+      document.getElementById("optTeacherMode").checked = Boolean(state.settings.teacherMode);
+
+      document.querySelectorAll("[data-theme-choice]").forEach((btn) => {
+        btn.classList.toggle("active", btn.getAttribute("data-theme-choice") === state.settings.theme);
+      });
+
+      render();
+    }
+
+    // İsteğe bağlı Firebase Realtime Database REST senkronizasyonu
+    function getCloudUrl() {
+      if (!FIREBASE_CONFIG || !FIREBASE_CONFIG.databaseURL) return null;
+      const base = FIREBASE_CONFIG.databaseURL.replace(/\/+$/, "");
+      return `${base}/melisGitarRehberi.json`;
+    }
+
+    async function pushCloudData() {
+      const url = getCloudUrl();
+      if (!url) return;
+      try {
+        await fetch(url, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            lessons: state.lessons,
+            myNotes: state.myNotes,
+            updatedAt: Date.now()
+          })
+        });
+        document.getElementById("syncStatus").textContent = "Bulutla eşitlendi";
+      } catch {
+        document.getElementById("syncStatus").textContent = "Bulut bağlantısı denenemedi (yerel kayıtlı)";
+      }
+    }
+
+    async function pullCloudData() {
+      const url = getCloudUrl();
+      if (!url) {
+        document.getElementById("syncStatus").textContent = "Yerel kayıt aktif • İçe Aktar ile tek tıkla güncelle";
+        return;
+      }
+      try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error("Network");
+        const cloud = await res.json();
+        if (cloud && typeof cloud === "object") {
+          if (cloud.lessons) {
+            state.lessons = normalizeLessonsObject(cloud.lessons);
+            localStorage.setItem(STORAGE_KEYS.lessons, JSON.stringify(state.lessons));
+          }
+          if (Array.isArray(cloud.myNotes)) {
+            state.myNotes = cloud.myNotes;
+            localStorage.setItem(STORAGE_KEYS.myNotes, JSON.stringify(state.myNotes));
+          }
+          render();
+        }
+        document.getElementById("syncStatus").textContent = "Bulut veritabanı bağlı ve güncel";
+      } catch {
+        document.getElementById("syncStatus").textContent = "Çevrimdışı / yerel veriler gösteriliyor";
+      }
+    }
+
+    function showToast(msg) {
+      const el = document.getElementById("toast");
+      el.textContent = msg;
+      el.classList.add("show");
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(() => el.classList.remove("show"), 2200);
+    }
+
+    function openModal(id) {
+      document.getElementById(id).classList.add("open");
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove("open");
+    }
+
+    function renderTabs() {
+      const nav = document.getElementById("navTabs");
+      nav.innerHTML = SECTIONS.map((sec) => {
+        const active = state.activeSection === sec.id ? "active" : "";
+        return `<button type="button" class="tab-btn ${active}" data-sec="${sec.id}">${escapeHtml(sec.label)}</button>`;
+      }).join("");
+
+      nav.querySelectorAll("[data-sec]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          state.activeSection = btn.getAttribute("data-sec");
+          render();
+        });
+      });
+    }
+
+    function render() {
+      renderTabs();
+      const secObj = SECTIONS.find((s) => s.id === state.activeSection) || SECTIONS[0];
+      const main = document.getElementById("mainContent");
+
+      if (secObj.id === "notlarim") {
+        renderMyNotesSection(main, secObj);
+        return;
+      }
+
+      const items = state.lessons[secObj.id] || [];
+      const addBtnHtml = state.settings.teacherMode
+        ? `<button type="button" class="btn-accent" id="btnAddToSection">+ Ekle</button>`
+        : "";
+
+      const cardsHtml = items.length
+        ? items.map((item) => {
+            const badgeHtml = item.tag ? `<span class="badge">${escapeHtml(item.tag)}</span>` : "";
+            const tipHtml = state.settings.showNotes && item.tip
+              ? `<div class="card-note">${escapeHtml(item.tip)}</div>`
+              : "";
+            const teacherActions = state.settings.teacherMode
+              ? `<div class="card-actions">
+                   <button type="button" data-edit-id="${escapeHtml(item.id)}">Düzenle</button>
+                   <button type="button" class="btn-danger" data-del-lesson-id="${escapeHtml(item.id)}">Sil</button>
+                 </div>`
+              : "";
+
+            return `
+              <article class="card">
+                <div class="card-top">
+                  <h3 class="card-title">${escapeHtml(item.title)}</h3>
+                  ${badgeHtml}
+                </div>
+                <p class="card-body">${escapeHtml(item.detail)}</p>
+                ${tipHtml}
+                ${teacherActions}
+              </article>
+            `;
+          }).join("")
+        : `<div class="empty-state">Bu bölümde henüz içerik yok. İçe Aktar menüsünden kolayca ekleyebiliriz.</div>`;
+
+      main.innerHTML = `
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">${escapeHtml(secObj.label)}</h2>
+            <p class="section-desc">${escapeHtml(secObj.desc)}</p>
+          </div>
+          ${addBtnHtml}
+        </div>
+        <div class="card-list">${cardsHtml}</div>
+      `;
+
+      const addBtn = document.getElementById("btnAddToSection");
+      if (addBtn) {
+        addBtn.addEventListener("click", () => openLessonModal(secObj.id, null));
+      }
+
+      main.querySelectorAll("[data-edit-id]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const found = items.find((x) => x.id === btn.getAttribute("data-edit-id"));
+          if (found) openLessonModal(secObj.id, found);
+        });
+      });
+
+      main.querySelectorAll("[data-del-lesson-id]").forEach((btn) => {
+        btn.addEventListener("click", async () => {
+          const id = btn.getAttribute("data-del-lesson-id");
+          const filtered = items.filter((x) => x.id !== id);
+          await saveLessons({ ...state.lessons, [secObj.id]: filtered });
+          render();
+          showToast("Kayıt silindi");
+        });
+      });
+    }
+
+    function renderMyNotesSection(main, secObj) {
+      const notesHtml = state.myNotes.length
+        ? state.myNotes.map((n) => `
+            <article class="card">
+              <div class="card-top">
+                <h3 class="card-title">${escapeHtml(n.title || "Notum")}</h3>
+                <span class="badge">${escapeHtml(n.date || "")}</span>
+              </div>
+              <p class="card-body">${escapeHtml(n.text)}</p>
+              <div class="card-actions">
+                <button type="button" class="btn-danger" data-del-note="${escapeHtml(n.id)}">Sil</button>
+              </div>
+            </article>
+          `).join("")
+        : `<div class="empty-state">Henüz not eklemedin. Yukarıdaki alana istediğin notu yazıp kaydedebilirsin.</div>`;
+
+      main.innerHTML = `
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">${escapeHtml(secObj.label)}</h2>
+            <p class="section-desc">${escapeHtml(secObj.desc)}</p>
+          </div>
+        </div>
+
+        <div class="note-box">
+          <div class="field">
+            <label for="myNoteTitle">Not Başlığı (İsteğe bağlı)</label>
+            <input type="text" id="myNoteTitle" placeholder="Örn: C akoru geçişi" />
+          </div>
+          <div class="field">
+            <label for="myNoteText">Notun</label>
+            <textarea id="myNoteText" placeholder="Buraya kendi notlarını yazabilirsin..."></textarea>
+          </div>
+          <button type="button" class="btn-accent" id="btnSaveMyNote">Notumu Kaydet</button>
+        </div>
+
+        <div class="card-list">${notesHtml}</div>
+      `;
+
+      document.getElementById("btnSaveMyNote").addEventListener("click", async () => {
+        const titleEl = document.getElementById("myNoteTitle");
+        const textEl = document.getElementById("myNoteText");
+        const text = textEl.value.trim();
+        if (!text) {
+          showToast("Önce bir not yazmalısın");
+          return;
+        }
+        const now = new Date();
+        const dateStr = now.toLocaleDateString("tr-TR", { day: "2-digit", month: "short" });
+        const newNote = {
+          id: `note-${Date.now()}`,
+          title: titleEl.value.trim() || "Çalışma Notu",
+          text,
+          date: dateStr
+        };
+        await saveMyNotes([newNote, ...state.myNotes]);
+        render();
+        showToast("Notun kaydedildi");
+      });
+
+      main.querySelectorAll("[data-del-note]").forEach((btn) => {
+        btn.addEventListener("click", async () => {
+          const id = btn.getAttribute("data-del-note");
+          await saveMyNotes(state.myNotes.filter((n) => n.id !== id));
+          render();
+          showToast("Not silindi");
+        });
+      });
+    }
+
+    function openLessonModal(sectionId, item) {
+      state.editingCard = item ? { sectionId, id: item.id } : null;
+      document.getElementById("lessonTitle").textContent = item ? "İçeriği Düzenle" : "Ders İçeriği Ekle";
+      document.getElementById("lessonSection").value = sectionId;
+      document.getElementById("lessonCardTitle").value = item ? item.title : "";
+      document.getElementById("lessonTag").value = item ? item.tag : "";
+      document.getElementById("lessonDetail").value = item ? item.detail : "";
+      document.getElementById("lessonTip").value = item ? item.tip : "";
+      openModal("lessonModal");
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#39;");
+    }
+
+    // Event Bağlantıları
+    document.getElementById("btnOpenSettings").addEventListener("click", () => {
+      applySettingsToUI();
+      openModal("settingsModal");
+    });
+
+    document.getElementById("btnOpenImport").addEventListener("click", () => {
+      openModal("importModal");
+    });
+
+    document.querySelectorAll("[data-close]").forEach((btn) => {
+      btn.addEventListener("click", () => closeModal(btn.getAttribute("data-close")));
+    });
+
+    document.querySelectorAll(".modal-backdrop").forEach((backdrop) => {
+      backdrop.addEventListener("click", (e) => {
+        if (e.target === backdrop) backdrop.classList.remove("open");
+      });
+    });
+
+    document.querySelectorAll("[data-theme-choice]").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        saveSettings({ theme: btn.getAttribute("data-theme-choice") });
+        showToast("Tema güncellendi");
+      });
+    });
+
+    document.getElementById("optCompact").addEventListener("change", (e) => {
+      saveSettings({ compact: e.target.checked });
+    });
+
+    document.getElementById("optShowNotes").addEventListener("change", (e) => {
+      saveSettings({ showNotes: e.target.checked });
+    });
+
+    document.getElementById("optTeacherMode").addEventListener("change", (e) => {
+      saveSettings({ teacherMode: e.target.checked });
+    });
+
+    document.getElementById("btnCopyShareJson").addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(JSON.stringify(state.lessons, null, 2));
+        showToast("JSON panoya kopyalandı");
+      } catch {
+        showToast("Kopyalama desteklenmedi");
+      }
+    });
+
+    document.getElementById("btnFillSampleJson").addEventListener("click", () => {
+      const sample = {
+        akorlar: [
+          {
+            title: "Am (La Minör)",
+            tag: "Açık Akor",
+            detail: "2. perde 4. tel (orta), 2. perde 3. tel (yüzük), 1. perde 2. tel (işaret). 6. tel boş bırakılır.",
+            tip: "C akoruna çok benzer; tek parmak hareketiyle geçiş yapılabilir."
+          }
+        ],
+        repertuar: [
+          {
+            title: "Akustik Akşam Döngüsü",
+            tag: "Şarkı Notu",
+            detail: "Am  --->  F  --->  C  --->  G",
+            tip: "Her akorda ikişer vuruş yaparak temiz geçişe odaklan."
+          }
+        ]
+      };
+      document.getElementById("jsonInput").value = JSON.stringify(sample, null, 2);
+      showToast("Örnek JSON eklendi");
+    });
+
+    document.getElementById("btnRunImport").addEventListener("click", async () => {
+      const rawText = document.getElementById("jsonInput").value.trim();
+      const mode = document.getElementById("importMode").value;
+      if (!rawText) {
+        showToast("Önce bir JSON yapıştır");
+        return;
+      }
+
+      let parsed;
+      try {
+        parsed = JSON.parse(rawText);
+      } catch {
+        showToast("JSON formatı hatalı, kontrol edelim");
+        return;
+      }
+
+      const incoming = normalizeLessonsObject(parsed);
+      let nextLessons;
+
+      if (mode === "replace") {
+        nextLessons = incoming;
+      } else {
+        nextLessons = { ...state.lessons };
+        Object.keys(incoming).forEach((secKey) => {
+          if (incoming[secKey].length) {
+            nextLessons[secKey] = [...incoming[secKey], ...(nextLessons[secKey] || [])];
+          }
+        });
+      }
+
+      await saveLessons(nextLessons);
+      closeModal("importModal");
+      document.getElementById("jsonInput").value = "";
+      render();
+      showToast("İçerikler başarıyla içe aktarıldı");
+    });
+
+    document.getElementById("btnSaveLesson").addEventListener("click", async () => {
+      const sec = document.getElementById("lessonSection").value;
+      const title = document.getElementById("lessonCardTitle").value.trim();
+      const tag = document.getElementById("lessonTag").value.trim();
+      const detail = document.getElementById("lessonDetail").value.trim();
+      const tip = document.getElementById("lessonTip").value.trim();
+
+      if (!title || !detail) {
+        showToast("Başlık ve içerik alanlarını dolduralım");
+        return;
+      }
+
+      const currentList = [...(state.lessons[sec] || [])];
+      if (state.editingCard) {
+        const idx = currentList.findIndex((x) => x.id === state.editingCard.id);
+        if (idx !== -1) {
+          currentList[idx] = { ...currentList[idx], title, tag, detail, tip };
+        }
+      } else {
+        currentList.unshift({
+          id: `${sec}-${Date.now()}`,
+          title,
+          tag,
+          detail,
+          tip
+        });
+      }
+
+      await saveLessons({ ...state.lessons, [sec]: currentList });
+      closeModal("lessonModal");
+      render();
+      showToast("Ders içeriği kaydedildi");
+    });
+
+    // Başlat
+    applySettingsToUI();
+    pullCloudData();
+  </script>
+</body>
+</html>
